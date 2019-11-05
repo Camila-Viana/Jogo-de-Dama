@@ -1,11 +1,35 @@
 #include "Damas.h"
 #include <iostream>
 #include <string>
+#include <SDL.h>
 
 void Inicializador() {
 
+	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		std::cout << "Erro: Init Video" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
 
+	SDL_Window* window;
+	window = SDL_CreateWindow("Jogo de Damas", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1366, 768, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	if (!window) {
+		std::cout << "Erro: Window" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
 
+	SDL_Surface *screen;
+	screen = SDL_GetWindowSurface(window);
+	if (screen == NULL) {
+		std::cout << "Erro: Screen" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	//Teste:
+	SDL_Delay(5000);
+	SDL_FreeSurface(screen);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 };
 
 Jogador::Jogador(std::string nome) {

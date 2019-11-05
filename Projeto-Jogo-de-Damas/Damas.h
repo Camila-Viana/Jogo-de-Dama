@@ -1,6 +1,9 @@
 #ifndef DAMAS_H_
 #define DAMAS_H_
 
+#include <string>
+#include <iostream>
+
 void Inicializador();
 
 class Jogador {
