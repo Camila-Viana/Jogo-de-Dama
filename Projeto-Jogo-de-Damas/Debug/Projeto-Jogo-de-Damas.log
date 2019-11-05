@@ -1,0 +1,16 @@
+﻿  Damas.cpp
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(17,17): error C3646: 'jogador': especificador de substituição desconhecido
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(17,17): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(21,53): error C2061: erro de sintaxe: identificador 'Jogador'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(32,17): error C3646: 'jogador': especificador de substituição desconhecido
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(32,17): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(36,51): error C2061: erro de sintaxe: identificador 'Jogador'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(14,66): error C2511: 'PeçaNormal::PeçaNormal(Jogador,int,int)': função membro sobrecarregada não encontrada em 'PeçaNormal'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(15): message : consulte a declaração de 'PeçaNormal'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(15,2): error C2671: 'PeçaNormal::{ctor}': funções membro static não possuem ponteiros 'this'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(16,2): error C2671: 'PeçaNormal::{ctor}': funções membro static não possuem ponteiros 'this'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(17,2): error C2671: 'PeçaNormal::{ctor}': funções membro static não possuem ponteiros 'this'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(46,62): error C2511: 'PeçaDama::PeçaDama(Jogador,int,int)': função membro sobrecarregada não encontrada em 'PeçaDama'
+  MainDamas.cpp
+  Gerando Código...
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(30): message : consulte a declaração de 'PeçaDama'

@@ -3,25 +3,37 @@
 
 void Inicializador();
 
+class Jogador {
+private:
+	std::string Nome;
+	int Npeças;
+public:
+	Jogador(std::string nome);
+	std::string getname();
+	void decreaseNpeças();
+	int getNpeças();
+};
+
 class Peça {
 public:
-	virtual void movimento();
-	virtual void opçõesMovimento();
+	virtual void movimento(int _PosX, int _PosY);
+	virtual void opçõesMovimento(int _PosX, int _PosY);
 };
 
 class PeçaNormal : public Peça {
 private:
-	Jogador _jogador;
-	int _PosX;
-	int _PosY;
+	Jogador jogador;
+	int PosX;
+	int PosY;
 public:
-	PeçaNorma();
-	~PeçaNormal();
+	PeçaNormal(Jogador _jogador, int _PosX, int _PosY);
 	void movimento(int _PosX, int _PosY) override;
 	void opçõesMovimento(int _PosX, int _PosY) override;
-	void getPositionX(int _PosX);
-	void getPositionY(int _PosY);
+	int getPositionX();
+	int getPositionY();
 };
+
+void TransformandoDama(PeçaNormal peça);
 
 class PeçaDama : public Peça {
 private:
@@ -30,23 +42,10 @@ private:
 	int PosY;
 public:
 	PeçaDama(Jogador _jogador, int _PosX, int _PosY);
-	~PeçaDama();
-	void movimento(int PosX, int PosY) override;
-	void opçõesmovimento(int PosX, int PosY) override;
-	void getPositionX(int PosX);
-	void getPositionY(int PosY);
-};
-
-class Jogador {
-private:
-	char Nome;
-	int Npeças;
-public:
-	Jogador();
-	~Jogador();
-	char getname(char Nome);
-	void decreaseNpeças(int Npeças);
-	int getNpeças(Npeças);
+	void movimento(int _PosX, int _PosY) override;
+	void opçõesMovimento(int _PosX, int _PosY) override;
+	int getPositionX();
+	int getPositionY();
 };
 
 void DestrutorFinal();
