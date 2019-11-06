@@ -1,7 +1,5 @@
 ﻿  Damas.cpp
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(55,66): error C2512: 'Jogador': nenhum construtor padrão apropriado disponível
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(56,66): error C2512: 'Jogador': nenhum construtor padrão apropriado disponível
 C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(9,7): message : consulte a declaração de 'Jogador'
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(87,62): error C2512: 'Jogador': nenhum construtor padrão apropriado disponível
-  MainDamas.cpp
-  Gerando Código...
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(88,62): error C2512: 'Jogador': nenhum construtor padrão apropriado disponível
 C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(9,7): message : consulte a declaração de 'Jogador'
