@@ -3,6 +3,8 @@
 #include <string>
 #include <SDL.h>
 
+
+
 void Inicializador() {
 
 	SDL_Init(SDL_INIT_VIDEO);
@@ -13,6 +15,7 @@ void Inicializador() {
 
 	SDL_Window* window;
 	window = SDL_CreateWindow("Jogo de Damas", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1366, 768, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_SetWindowFullscreen(window, 0);
 	if (!window) {
 		std::cout << "Erro: Window" << SDL_GetError() << std::endl;
 		SDL_Quit();
@@ -24,17 +27,15 @@ void Inicializador() {
 		std::cout << "Erro: Screen" << SDL_GetError() << std::endl;
 		SDL_Quit();
 	}
-
-	//Teste:
-	SDL_Delay(5000);
-	SDL_FreeSurface(screen);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
 };
 
-Jogador::Jogador(std::string nome) {
-	Nome = nome;
+Jogador::Jogador() {
+	Nome = "jogador";
 	Npeças = 12;
+};
+
+void Jogador::setname(std::string nome) {
+	this->Nome = nome;
 };
 
 std::string Jogador::getname() {

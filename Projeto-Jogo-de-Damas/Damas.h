@@ -11,7 +11,8 @@ private:
 	std::string Nome;
 	int Npeças;
 public:
-	Jogador(std::string nome);
+	Jogador();
+	void setname(std::string nome);
 	std::string getname();
 	void decreaseNpeças();
 	int getNpeças();
