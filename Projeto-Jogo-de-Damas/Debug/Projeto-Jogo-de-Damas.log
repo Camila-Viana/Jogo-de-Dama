@@ -1,2 +1,10 @@
 ﻿  Damas.cpp
-  Projeto-Jogo-de-Damas.vcxproj -> C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Debug\Projeto-Jogo-de-Damas.exe
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(34,32): error C2061: erro de sintaxe: identificador 'Tabuleiro'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(64,61): error C2511: 'void PeçaNormal::PeçasIniciais(Tabuleiro [][8])': função membro sobrecarregada não encontrada em 'PeçaNormal'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(27): message : consulte a declaração de 'PeçaNormal'
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(68,24): error C2676: '==' binário : 'Tabuleiro' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(71,24): error C2676: '==' binário : 'Tabuleiro' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+  MainDamas.cpp
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.cpp(159,21): warning C4553: '==': o resultado da expressão não usado; você pretendia que fosse '='?
+  Gerando Código...
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Damas.h(34,32): error C2061: erro de sintaxe: identificador 'Tabuleiro'

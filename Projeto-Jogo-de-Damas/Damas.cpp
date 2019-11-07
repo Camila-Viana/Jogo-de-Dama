@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
 
 
 
@@ -29,11 +30,56 @@ void Inicializador() {
 		SDL_Quit();
 	}
 
-	SDL_Delay(5000);
-	SDL_FreeSurface(screen);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	IMG_Init(IMG_INIT_JPG);
+	IMG_Init(IMG_INIT_JPG);
 
+	SDL_Surface* Interface;
+	Interface = IMG_Load("Interface.JPG");
+	if (Interface == NULL) {
+		std::cout << "Erro: Interface" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	SDL_Surface* TabuleiroPrincipal;
+	TabuleiroPrincipal = IMG_Load("Tabuleiro.JPG");
+	if (TabuleiroPrincipal == NULL) {
+		std::cout << "Erro: Tabuleiro" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	SDL_Surface* Instruções;
+	Instruções = IMG_Load("instruções.PNG");
+	if (Instruções == NULL) {
+		std::cout << "Erro: Instruções" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	SDL_Surface* PeçaBrancaNormal;
+	PeçaBrancaNormal = IMG_Load("BrancaLisa.PNG");
+	if (PeçaBrancaNormal == NULL) {
+		std::cout << "Erro: PeçaBrancaNormal" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	SDL_Surface* PeçaBrancaNormalBrilho;
+	PeçaBrancaNormalBrilho = IMG_Load("BrancaBrilho.PNG");
+	if (PeçaBrancaNormalBrilho == NULL) {
+		std::cout << "Erro: PeçaBrancaNormalBrilho" << SDL_GetError() << std::endl;
+		SDL_Quit();
+	}
+
+	SDL_Surface* PeçaBrancaDama;
+	PeçaBrancaDama = IMG_Load("BrancaEstrela.PNG");
+
+	SDL_Surface* PeçaBRancaDamaBrilho;
+	SDL_Surface* PeçaPretaNormal;
+	SDL_Surface* PeçaPretaNormalBrilho;
+	SDL_Surface* PeçaPretaDama;
+	SDL_Surface* PeçaPretaDamaBrilho;
+	SDL_Surface* Play;
+	SDL_Surface* Exit;
+	SDL_Surface* Instructions;
+	SDL_Surface* Back;
 };
 
 Jogador::Jogador() {
@@ -67,7 +113,7 @@ PeçaNormal::PeçaNormal(Jogador _jogador, int _PosX, int _PosY) {
 	this->PosY = _PosY;
 };
 
-void PeçaNormal::PeçasIniciais(Tabuleiro Tabuleiro[8][8]) {
+void PeçaNormal::PeçasIniciais(int **Tabuleiro) {
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
@@ -133,7 +179,7 @@ int PeçaDama::getPositionY() {
 	return this->PosY;
 };
 
-void Tabuleiro::setTabuleiroInicial(int Tabuleiro[8][8]) {
+void Tabuleiro::setTabuleiroInicial(int **Tabuleiro) {
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {

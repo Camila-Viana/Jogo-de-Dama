@@ -31,7 +31,7 @@ private:
 	int PosY;
 public:
 	PeçaNormal(Jogador _jogador, int _PosX, int _PosY);
-	void PeçasIniciais(Tabuleiro Tabuleiro[8][8]);
+	void PeçasIniciais(int **Tabuleiro);
 	void movimento(int _PosX, int _PosY) override;
 	void opçõesMovimento(int _PosX, int _PosY) override;
 	int getPositionX();
@@ -56,7 +56,7 @@ public:
 class Tabuleiro {
 public:
 	int Tabuleiro[8][8];
-	void setTabuleiroInicial(int Tabuleiro[8][8]);
+	void setTabuleiroInicial(int **Tabuleiro);
 };
 
 void DestrutorFinal();
