@@ -146,7 +146,6 @@ void Inicializador() {
 
 	Tabuleiro TabInicial;
 	TabInicial.setTabuleiroInicial();
-
 };
 
 Jogador::Jogador() {
@@ -171,18 +170,18 @@ int Jogador::getNpeças() {
 };
 
 
-void Peça::movimento(int _PosX, int _PosY, int _PosTab) {};
+void Peça::movimento(SDL_Rect _PosTela, int _PosTab) {};
 
-void Peça::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {};
+void Peça::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {};
 
 
-PeçaNormal::PeçaNormal(Jogador _jogador, int _PosX, int _PosY, int _PosTab) {
+PeçaNormal::PeçaNormal(Jogador _jogador, SDL_Rect _PosTela, int _PosTab) {
 	this->jogador = _jogador;
-	this->PosX = _PosX;
-	this->PosY = _PosY;
+	this->PosTela->x = _PosTela.x;
+	this->PosTela->y = _PosTela.y;
 };
 
-void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, int _PosX, int _PosY, int _PosTab){
+void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, SDL_Rect _PosTela, int _PosTab){
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
@@ -196,24 +195,14 @@ void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, int _PosX, int _PosY, int _
 	}
 };
 
-void PeçaNormal::movimento(int _PosX, int _PosY, int _PosTab) {
+void PeçaNormal::movimento(SDL_Rect _PosTela, int _PosTab) {
 
 
 
 };
 
-void PeçaNormal::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {
+void PeçaNormal::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {
 
-
-
-};
-
-int PeçaNormal::getPositionX() {
-	return this->PosX;
-};
-
-int PeçaNormal::getPositionY() {
-	return this->PosY;
 };
 
 
@@ -224,32 +213,23 @@ void TransformandoDama(PeçaNormal peça) {
 };
 
 
-PeçaDama::PeçaDama(Jogador _jogador, int _PosX, int _PosY, int _PosTab) {
+PeçaDama::PeçaDama(Jogador _jogador, SDL_Rect _PosTela, int _PosTab) {
 
 
 
 };
 
-void PeçaDama::movimento(int _PosX, int _PosY, int _PosTab) {
+void PeçaDama::movimento(SDL_Rect _PosTela, int _PosTab) {
 
 
 
 };
 
-void PeçaDama::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {
+void PeçaDama::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {
 
 
 
 };
-
-int PeçaDama::getPositionX() {
-	return this->PosX;
-};
-
-int PeçaDama::getPositionY() {
-	return this->PosY;
-};
-
 
 void Tabuleiro::setTabuleiroInicial() {
 	int i, j;
