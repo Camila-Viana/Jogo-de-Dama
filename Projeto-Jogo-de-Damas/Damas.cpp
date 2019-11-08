@@ -143,6 +143,10 @@ void Inicializador() {
 		std::cout << "Erro: Back" << SDL_GetError() << std::endl;
 		SDL_Quit();
 	}
+
+	Tabuleiro TabInicial;
+	TabInicial.setTabuleiroInicial();
+
 };
 
 Jogador::Jogador() {
@@ -167,38 +171,38 @@ int Jogador::getNpeças() {
 };
 
 
-void Peça::movimento(int _PosX, int _PosY) {};
+void Peça::movimento(int _PosX, int _PosY, int _PosTab) {};
 
-void Peça::opçõesMovimento(int _PosX, int _PosY) {};
+void Peça::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {};
 
 
-PeçaNormal::PeçaNormal(Jogador _jogador, int _PosX, int _PosY) {
+PeçaNormal::PeçaNormal(Jogador _jogador, int _PosX, int _PosY, int _PosTab) {
 	this->jogador = _jogador;
 	this->PosX = _PosX;
 	this->PosY = _PosY;
 };
 
-void PeçaNormal::PeçasIniciais(int **Tabuleiro) {
+void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, int _PosX, int _PosY, int _PosTab){
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
-			if (Tabuleiro[i][j] == 1) {
+			if (TabInicial.Tabuleiroinicial[i][j] == 1) {
 
 			}
-			if (Tabuleiro[i][j] == 2) {
+			if (TabInicial.Tabuleiroinicial[i][j] == 2) {
 
 			}
 		}
 	}
 };
 
-void PeçaNormal::movimento(int _PosX, int _PosY) {
+void PeçaNormal::movimento(int _PosX, int _PosY, int _PosTab) {
 
 
 
 };
 
-void PeçaNormal::opçõesMovimento(int _PosX, int _PosY) {
+void PeçaNormal::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {
 
 
 
@@ -220,19 +224,19 @@ void TransformandoDama(PeçaNormal peça) {
 };
 
 
-PeçaDama::PeçaDama(Jogador _jogador, int _PosX, int _PosY) {
+PeçaDama::PeçaDama(Jogador _jogador, int _PosX, int _PosY, int _PosTab) {
 
 
 
 };
 
-void PeçaDama::movimento(int _PosX, int _PosY) {
+void PeçaDama::movimento(int _PosX, int _PosY, int _PosTab) {
 
 
 
 };
 
-void PeçaDama::opçõesMovimento(int _PosX, int _PosY) {
+void PeçaDama::opçõesMovimento(int _PosX, int _PosY, int _PosTab) {
 
 
 
@@ -247,36 +251,24 @@ int PeçaDama::getPositionY() {
 };
 
 
-void Tabuleiro::setTabuleiroInicial(int **Tabuleiro) {
+void Tabuleiro::setTabuleiroInicial() {
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
 			if ((i == 0 || i == 2) && j % 2 == 0) {
-				Tabuleiro[i][j] = 2;
+				this->Tabuleiroinicial[i][j] = 2;
 			}
 			else {
-				Tabuleiro[i][j] = 0;
+				this->Tabuleiroinicial[i][j] = 0;
 			}
 			if (i == 1 && j % 2 == 1) {
-				Tabuleiro[i][j] = 2;
-			}
-			else {
-				Tabuleiro[i][j] = 0;
-			}
-			if (i == 3 || i == 4) {
-				Tabuleiro[i][j] = 0;
+				this->Tabuleiroinicial[i][j] = 2;
 			}
 			if ((i == 5 || i == 7) && j % 2 == 1) {
-				Tabuleiro[i][j] = 1;
-			}
-			else {
-				Tabuleiro[i][j] = 0;
+				this->Tabuleiroinicial[i][j] = 1;
 			}
 			if (i == 6 && j % 2 == 0) {
-				Tabuleiro[i][j] = 1;
-			}
-			else {
-				Tabuleiro[i][j] == 0;
+				this->Tabuleiroinicial[i][j] = 1;
 			}
 		}
 	}

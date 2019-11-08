@@ -20,8 +20,8 @@ public:
 
 class Peça {
 public:
-	virtual void movimento(int _PosX, int _PosY);
-	virtual void opçõesMovimento(int _PosX, int _PosY);
+	virtual void movimento(int _PosX, int _PosY, int _PosTab);
+	virtual void opçõesMovimento(int _PosX, int _PosY, int _PosTab);
 };
 
 class PeçaNormal : public Peça {
@@ -29,11 +29,12 @@ private:
 	Jogador jogador;
 	int PosX;
 	int PosY;
+	int PosTab[2];
 public:
-	PeçaNormal(Jogador _jogador, int _PosX, int _PosY);
-	void PeçasIniciais(int **Tabuleiro);
-	void movimento(int _PosX, int _PosY) override;
-	void opçõesMovimento(int _PosX, int _PosY) override;
+	PeçaNormal(Jogador _jogador, int _PosX, int _PosY, int _PosTab);
+	void PecasIniciais(Tabuleiro TabInicial, int _PosX, int _PosY, int _PosTab);
+	void movimento(int _PosX, int _PosY, int _PosTab) override;
+	void opçõesMovimento(int _PosX, int _PosY, int _PosTab) override;
 	int getPositionX();
 	int getPositionY();
 };
@@ -45,18 +46,19 @@ private:
 	Jogador jogador;
 	int PosX;
 	int PosY;
+	int PosTab[2];
 public:
-	PeçaDama(Jogador _jogador, int _PosX, int _PosY);
-	void movimento(int _PosX, int _PosY) override;
-	void opçõesMovimento(int _PosX, int _PosY) override;
+	PeçaDama(Jogador _jogador, int _PosX, int _PosY, int _PosTab);
+	void movimento(int _PosX, int _PosY, int _PosTab) override;
+	void opçõesMovimento(int _PosX, int _PosY, int _PosTab) override;
 	int getPositionX();
 	int getPositionY();
 };
 
 class Tabuleiro {
 public:
-	int Tabuleiro[8][8];
-	void setTabuleiroInicial(int **Tabuleiro);
+	int Tabuleiroinicial[8][8];
+	void setTabuleiroInicial();
 };
 
 void DestrutorFinal();
