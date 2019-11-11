@@ -1,4 +1,0 @@
-﻿SDL2main.lib(SDL_windows_main.obj) : error LNK2019: símbolo externo indefinido _SDL_main referenciado na função _main_getcmdline
-    Dica em símbolos que estão definidos e podem corresponder potencialmente a:
-      "int __cdecl SDL_main(void)" (?SDL_main@@YAHXZ)
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Projeto-Jogo-de-Damas\Debug\Projeto-Jogo-de-Damas.exe : fatal error LNK1120: 1 externo não resolvidos
