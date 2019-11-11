@@ -5,8 +5,6 @@
 #include <iostream>
 #include <SDL.h>
 
-void Inicializador();
-
 class Jogador {
 private:
 	std::string Nome;
@@ -17,6 +15,12 @@ public:
 	std::string getname();
 	void decreaseNpeças();
 	int getNpeças();
+};
+
+class Tabuleiro {
+public:
+	int Tabuleiroinicial[8][8];
+	void setTabuleiroInicial();
 };
 
 class Peça {
@@ -48,12 +52,6 @@ public:
 	PeçaDama(Jogador _jogador, SDL_Rect _PosTela, int _PosTab);
 	void movimento(SDL_Rect _PosTela, int _PosTab) override;
 	void opçõesMovimento(SDL_Rect _PosTela, int _PosTab) override;
-};
-
-class Tabuleiro {
-public:
-	int Tabuleiroinicial[8][8];
-	void setTabuleiroInicial();
 };
 
 void DestrutorFinal();
