@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	//Uploads das Imagens:
 	al_init_image_addon();
 	ALLEGRO_BITMAP* Interface = al_load_bitmap("Imagens/Interface.jpg");
-	ALLEGRO_BITMAP* Tabuleiro = al_load_bitmap("Imagens/Tabuleiro.jpg");
+	ALLEGRO_BITMAP* TabuleiroImagem = al_load_bitmap("Imagens/Tabuleiro.jpg");
 	ALLEGRO_BITMAP* Instrucoes = al_load_bitmap("Imagens/instrucoes.png");
 	ALLEGRO_BITMAP* Play = al_load_bitmap("Imagens/play.png");
 	ALLEGRO_BITMAP* Instructions = al_load_bitmap("Imagens/instructions.png");
@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 	ALLEGRO_BITMAP* PretaBrilho = al_load_bitmap("Imagens/PretaBrilho.png");
 	ALLEGRO_BITMAP* PretaDama = al_load_bitmap("Imagens/PretaEstrela.png");
 	ALLEGRO_BITMAP* PretaDamaBrilho = al_load_bitmap("Imagens/PretaEstrelaBrilho.png");
-	if (!Interface || !Tabuleiro || !Instrucoes || !Play || !Instructions || !Back || !Exit || !BrancaLisa ||
+	if (!Interface || !TabuleiroImagem || !Instrucoes || !Play || !Instructions || !Back || !Exit || !BrancaLisa ||
 		!BrancaBrilho || !BrancaDama || !BrancaDamaBrilho || !PretaLisa || !PretaBrilho || !PretaDama || !PretaDamaBrilho) {
 		std::cout << "Error: Uploads das Imagens" << std::endl;
 		return -1;
@@ -85,21 +85,16 @@ int main(int argc, char** argv){
 		return -1;
 	}
 
+	//Tabuleiro:
+	Tabuleiro TabInicial;
+	TabInicial.setTabuleiroInicial();
+
 	//Variaveis de Estado:
 	bool jogando = false;
 	bool duringInterface = false;
 	bool duringInstructions = false;
 	bool duringGame = false;
 	bool duringPremacao = false;
-	
-	//Fonte:
-	al_init_font_addon();
-	ALLEGRO_FONT* FonteNomes;
-	FonteNomes = al_load_font("FonteNomes.ttf", 48, 0);
-	if (!FonteNomes) {
-		std::cout << "Error: Upload Fonte Nomes" << std::endl;
-		return -1;
-	}
 
 	//Registro de eventos:
 	al_register_event_source(EventosPrincipais, al_get_display_event_source(Window));
@@ -179,15 +174,22 @@ int main(int argc, char** argv){
 		}
 		while (jogando == true && duringGame == true) {
 
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+			al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
+			al_flip_display();
+
+			al_rest(10.0);
+
+			jogando = false;
+
 		}
 	}
 
 	al_destroy_display(Window);
 	al_destroy_event_queue(EventosPrincipais);
-	al_destroy_font(FonteNomes);
 	al_destroy_timer(TimerPrincipal);
 	al_destroy_bitmap(Interface);
-	al_destroy_bitmap(Tabuleiro);
+	al_destroy_bitmap(TabuleiroImagem);
 	al_destroy_bitmap(Instrucoes);
 	al_destroy_bitmap(Play);
 	al_destroy_bitmap(Instructions);
