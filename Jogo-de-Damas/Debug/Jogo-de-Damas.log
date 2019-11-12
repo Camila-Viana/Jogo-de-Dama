@@ -1,8 +1,3 @@
 ﻿  JogoDamas.cpp
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\JogoDamas.cpp(70,26): warning C4551: faltando lista de argumentos na chamada de função
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\JogoDamas.cpp(98,7): warning C4101: 'Player1': variável local não referenciada
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\JogoDamas.cpp(99,7): warning C4101: 'Player2': variável local não referenciada
-JogoDamas.obj : error LNK2019: sÝmbolo externo indefinido __imp__al_init_image_addon referenciado na funþÒo _main
-JogoDamas.obj : error LNK2019: sÝmbolo externo indefinido __imp__al_load_font referenciado na funþÒo _main
-JogoDamas.obj : error LNK2019: sÝmbolo externo indefinido __imp__al_init_font_addon referenciado na funþÒo _main
-C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\Debug\Jogo-de-Damas.exe : fatal error LNK1120: 3 externo nÒo resolvidos
+C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\JogoDamas.cpp(69,26): warning C4551: faltando lista de argumentos na chamada de função
+  Jogo-de-Damas.vcxproj -> C:\Users\User\Desktop\Daniel\GitHub\Jogo-de-Dama\Jogo-de-Damas\Debug\Jogo-de-Damas.exe

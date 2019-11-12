@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include "DamasBiblioteca.h"
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
+#include "allegro5/allegro.h"
+#include "allegro5/allegro_image.h"
+#include "allegro5/allegro_primitives.h"
+#include "allegro5/allegro_font.h"
+#include "allegro5/allegro_ttf.h"
+#include "allegro5/allegro_audio.h"
+#include "allegro5/allegro_acodec.h"
 
 const float FPS = 180;
 
@@ -36,7 +36,6 @@ int main(int argc, char** argv){
 	ALLEGRO_BITMAP* Interface = al_load_bitmap("Imagens/Interface.jpg");
 	ALLEGRO_BITMAP* Tabuleiro = al_load_bitmap("Imagens/Tabuleiro.jpg");
 	ALLEGRO_BITMAP* Instrucoes = al_load_bitmap("Imagens/instrucoes.png");
-	ALLEGRO_BITMAP* NamesIn = al_load_bitmap("Imagens/EntradaNomes.jpg");
 	ALLEGRO_BITMAP* Play = al_load_bitmap("Imagens/play.png");
 	ALLEGRO_BITMAP* Instructions = al_load_bitmap("Imagens/instructions.png");
 	ALLEGRO_BITMAP* Back = al_load_bitmap("Imagens/back.png");
@@ -49,7 +48,7 @@ int main(int argc, char** argv){
 	ALLEGRO_BITMAP* PretaBrilho = al_load_bitmap("Imagens/PretaBrilho.png");
 	ALLEGRO_BITMAP* PretaDama = al_load_bitmap("Imagens/PretaEstrela.png");
 	ALLEGRO_BITMAP* PretaDamaBrilho = al_load_bitmap("Imagens/PretaEstrelaBrilho.png");
-	if (!Interface || !Tabuleiro || !Instrucoes || !Play || !Instructions || !Back || !Exit || !BrancaLisa || !NamesIn ||
+	if (!Interface || !Tabuleiro || !Instrucoes || !Play || !Instructions || !Back || !Exit || !BrancaLisa ||
 		!BrancaBrilho || !BrancaDama || !BrancaDamaBrilho || !PretaLisa || !PretaBrilho || !PretaDama || !PretaDamaBrilho) {
 		std::cout << "Error: Uploads das Imagens" << std::endl;
 		return -1;
@@ -90,14 +89,9 @@ int main(int argc, char** argv){
 	bool jogando = false;
 	bool duringInterface = false;
 	bool duringInstructions = false;
-	bool duringNamesIn = false;
 	bool duringGame = false;
 	bool duringPremacao = false;
-
-	//Nomes dos Jogadores:
-	char Player1[50];
-	char Player2[50];
-
+	
 	//Fonte:
 	al_init_font_addon();
 	ALLEGRO_FONT* FonteNomes;
@@ -124,6 +118,7 @@ int main(int argc, char** argv){
 
 	while (jogando == true) {
 		while (jogando == true && duringInterface == true) {
+			
 			Inicio:
 			al_draw_bitmap(Interface, 0, 0, 0);
 			al_draw_bitmap(Play, 91, 153, 0);
@@ -137,20 +132,21 @@ int main(int argc, char** argv){
 			if (e_interface.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				//Play:
 				if (e_interface.mouse.x >= 91 && e_interface.mouse.x <= 341 && e_interface.mouse.y >= 153 && e_interface.mouse.y <= 294) {
-					duringNamesIn = true;
+					duringGame = true;
+					duringInterface = false;
 				}
 				//Instructions: 
-				if (e_interface.mouse.x >= 1025 && e_interface.mouse.x <= 1275 && e_interface.mouse.y >= 153 && e_interface.mouse.y <= 294) {
+				else if (e_interface.mouse.x >= 1025 && e_interface.mouse.x <= 1275 && e_interface.mouse.y >= 153 && e_interface.mouse.y <= 294) {
 					duringInstructions = true;
 				}
 				//Exit:
-				if (e_interface.mouse.x >= 0 && e_interface.mouse.x <= 250 && e_interface.mouse.y >= 627 && e_interface.mouse.y <= 768) {
+				else if (e_interface.mouse.x >= 0 && e_interface.mouse.x <= 250 && e_interface.mouse.y >= 627 && e_interface.mouse.y <= 768) {
 					duringInterface = 0;
 					jogando = 0;
 				}
 			}
-			if (e_interface.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-				return -1;
+			else if (e_interface.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+				jogando = false;
 			}
 
 			//Instrucoes:
@@ -170,48 +166,41 @@ int main(int argc, char** argv){
 						duringInstructions = false;
 						goto Inicio;
 					}
-					if (e_inst.mouse.x >= 1100 && e_inst.mouse.x <= 1350 && e_inst.mouse.y >= 627 && e_inst.mouse.y <= 768) {
+					else if (e_inst.mouse.x >= 1100 && e_inst.mouse.x <= 1350 && e_inst.mouse.y >= 627 && e_inst.mouse.y <= 768) {
 						duringInstructions = false;
-						duringNamesIn = true;
+						duringGame = true;
+						duringInterface = false;
 					}
 				}
 				else if (e_interface.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-					return -1;
+					jogando = false;
 				}
-			}
-			while (jogando == true && duringInterface == true && duringNamesIn == true) {
-				
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-				al_draw_bitmap(NamesIn, 0, 0, 0);
-				al_draw_filled_rectangle(483, 284, 883, 334, al_map_rgb(0, 0, 0));
-				al_draw_filled_rectangle(483, 384, 883, 434, al_map_rgb(0, 0, 0));
-				al_draw_bitmap(Play, 533, 484, 0);
-				al_draw_bitmap(Back, 0, 627, 0);
-				al_flip_display();
+			}			
+		}
+		while (jogando == true && duringGame == true) {
 
-				ALLEGRO_EVENT e_NamesIn;
-				al_wait_for_event(EventosPrincipais, &e_NamesIn);
-
-				if (e_NamesIn.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-					if (e_NamesIn.mouse.x >= 483 && e_NamesIn.mouse.x <= 883 && e_NamesIn.mouse.y >= 284 && e_NamesIn.mouse.y <= 334) {
-
-					}
-					if (e_NamesIn.mouse.x >= 483 && e_NamesIn.mouse.x <= 883 && e_NamesIn.mouse.y >= 384 && e_NamesIn.mouse.y <= 434) {
-
-					}
-					if (e_NamesIn.mouse.x >= 533 && e_NamesIn.mouse.x <= 783 && e_NamesIn.mouse.y >= 484 && e_NamesIn.mouse.y <= 625) {
-
-					}
-					if (e_NamesIn.mouse.x >= 0 && e_NamesIn.mouse.x <= 250 && e_NamesIn.mouse.y >= 627 && e_NamesIn.mouse.y <= 768) {
-
-					}					
-				}
-				else if (e_NamesIn.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-					return -1;
-				}
-			}
 		}
 	}
+
+	al_destroy_display(Window);
+	al_destroy_event_queue(EventosPrincipais);
+	al_destroy_font(FonteNomes);
+	al_destroy_timer(TimerPrincipal);
+	al_destroy_bitmap(Interface);
+	al_destroy_bitmap(Tabuleiro);
+	al_destroy_bitmap(Instrucoes);
+	al_destroy_bitmap(Play);
+	al_destroy_bitmap(Instructions);
+	al_destroy_bitmap(Back);
+	al_destroy_bitmap(Exit);
+	al_destroy_bitmap(BrancaLisa);
+	al_destroy_bitmap(BrancaBrilho);
+	al_destroy_bitmap(BrancaDama);
+	al_destroy_bitmap(BrancaDamaBrilho);
+	al_destroy_bitmap(PretaLisa);
+	al_destroy_bitmap(PretaBrilho);
+	al_destroy_bitmap(PretaDama);
+	al_destroy_bitmap(PretaDamaBrilho);
 
   return 0;
 }
