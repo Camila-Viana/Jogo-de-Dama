@@ -5,7 +5,7 @@
 
 Jogador::Jogador() {
 	Nome = "jogador";
-	Npeças = 12;
+	Npecas = 12;
 };
 
 void Jogador::setname(std::string nome) {
@@ -16,27 +16,27 @@ std::string Jogador::getname() {
 	return this->Nome;
 };
 
-void Jogador::decreaseNpeças() {
-	Npeças--;
+void Jogador::decreaseNpecas() {
+	Npecas--;
 }
 
-int Jogador::getNpeças() {
-	return this->Npeças;
+int Jogador::getNpecas() {
+	return this->Npecas;
 };
 
 
-void Peça::movimento(SDL_Rect _PosTela, int _PosTab) {};
+void Peca::movimento(int _x, int _y, int _PosTab) {};
 
-void Peça::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {};
+void Peca::opcoesMovimento(int _x, int _y, int _PosTab) {};
 
 
-PeçaNormal::PeçaNormal(Jogador _jogador, SDL_Rect _PosTela, int _PosTab) {
+PecaNormal::PecaNormal(Jogador _jogador, int _x, int _y, int _PosTab) {
 	this->jogador = _jogador;
-	this->PosTela->x = _PosTela.x;
-	this->PosTela->y = _PosTela.y;
+	this->x = _x;
+	this->y = _y;
 };
 
-void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, SDL_Rect _PosTela, int _PosTab){
+void PecaNormal::PecasIniciais(Tabuleiro TabInicial, int _x, int _y, int _PosTab){
 	int i, j;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
@@ -50,37 +50,37 @@ void PeçaNormal::PecasIniciais(Tabuleiro TabInicial, SDL_Rect _PosTela, int _Po
 	}
 };
 
-void PeçaNormal::movimento(SDL_Rect _PosTela, int _PosTab) {
+void PecaNormal::movimento(int _x, int _y, int _PosTab) {
 
 
 
 };
 
-void PeçaNormal::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {
+void PecaNormal::opcoesMovimento(int _x, int _y, int _PosTab) {
 
 };
 
 
-void TransformandoDama(PeçaNormal peça) {
-
-
-
-};
-
-
-PeçaDama::PeçaDama(Jogador _jogador, SDL_Rect _PosTela, int _PosTab) {
+void TransformandoDama(PecaNormal peca) {
 
 
 
 };
 
-void PeçaDama::movimento(SDL_Rect _PosTela, int _PosTab) {
+
+PecaDama::PecaDama(Jogador _jogador, int _x, int _y, int _PosTab) {
 
 
 
 };
 
-void PeçaDama::opçõesMovimento(SDL_Rect _PosTela, int _PosTab) {
+void PecaDama::movimento(int _x, int _y, int _PosTab) {
+
+
+
+};
+
+void PecaDama::opcoesMovimento(int _x, int _y, int _PosTab) {
 
 
 

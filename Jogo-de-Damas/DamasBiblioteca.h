@@ -7,13 +7,13 @@
 class Jogador {
 private:
 	std::string Nome;
-	int Npeças;
+	int Npecas;
 public:
 	Jogador();
 	void setname(std::string nome);
 	std::string getname();
-	void decreaseNpeças();
-	int getNpeças();
+	void decreaseNpecas();
+	int getNpecas();
 };
 
 class Tabuleiro {
@@ -22,35 +22,37 @@ public:
 	void setTabuleiroInicial();
 };
 
-class Peça {
+class Peca {
 public:
-	virtual void movimento(SDL_Rect _PosTela, int _PosTab);
-	virtual void opçõesMovimento(SDL_Rect _PosTela, int _PosTab);
+	virtual void movimento(int _x, int _y, int _PosTab);
+	virtual void opcoesMovimento(int _x, int _y, int _PosTab);
 };
 
-class PeçaNormal : public Peça {
+class PecaNormal : public Peca {
 private:
 	Jogador jogador;
-	SDL_Rect* PosTela;
+	int x;
+	int y;
 	int PosTab[2];
 public:
-	PeçaNormal(Jogador _jogador, SDL_Rect _PosTela, int _PosTab);
-	void PecasIniciais(Tabuleiro TabInicial, SDL_Rect _PosTela, int _PosTab);
-	void movimento(SDL_Rect _PosTela, int _PosTab) override;
-	void opçõesMovimento(SDL_Rect _PosTela, int _PosTab) override;
+	PecaNormal(Jogador _jogador, int _x, int _y, int _PosTab);
+	void PecasIniciais(Tabuleiro TabInicial, int _x, int _y, int _PosTab);
+	void movimento(int _x, int _y, int _PosTab) override;
+	void opcoesMovimento(int _x, int _y, int _PosTab) override;
 };
 
-void TransformandoDama(PeçaNormal peça);
+void TransformandoDama(PecaNormal peca);
 
-class PeçaDama : public Peça {
+class PecaDama : public Peca {
 private:
 	Jogador jogador;
-	SDL_Rect* PosTela;
+	int x;
+	int y;
 	int PosTab[2];
 public:
-	PeçaDama(Jogador _jogador, SDL_Rect _PosTela, int _PosTab);
-	void movimento(SDL_Rect _PosTela, int _PosTab) override;
-	void opçõesMovimento(SDL_Rect _PosTela, int _PosTab) override;
+	PecaDama(Jogador _jogador, int _x, int _y, int _PosTab);
+	void movimento(int _x, int _y, int _PosTab) override;
+	void opcoesMovimento(int _x, int _y, int _PosTab) override;
 };
 
 void DestrutorFinal();
