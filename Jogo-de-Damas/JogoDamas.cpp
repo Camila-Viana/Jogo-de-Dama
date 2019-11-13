@@ -22,10 +22,7 @@ int main(int argc, char** argv){
 
 	//Tela: 
 	ALLEGRO_DISPLAY* Window;
-	ALLEGRO_DISPLAY_MODE   Window_data;
-	al_get_display_mode(al_get_num_display_modes() - 1, &Window_data);
-	al_set_new_display_flags(ALLEGRO_FULLSCREEN);
-	Window = al_create_display(Window_data.width, Window_data.height);
+	Window = al_create_display(1000, 562);
 	if (!Window) {
 		std::cout << "Error: Window" << std::endl;
 		return -1;
@@ -35,21 +32,12 @@ int main(int argc, char** argv){
 	al_init_image_addon();
 	ALLEGRO_BITMAP* Interface = al_load_bitmap("Imagens/Interface.jpg");
 	ALLEGRO_BITMAP* TabuleiroImagem = al_load_bitmap("Imagens/Tabuleiro.jpg");
-	ALLEGRO_BITMAP* Instrucoes = al_load_bitmap("Imagens/instrucoes.png");
-	ALLEGRO_BITMAP* Play = al_load_bitmap("Imagens/play.png");
-	ALLEGRO_BITMAP* Instructions = al_load_bitmap("Imagens/instructions.png");
-	ALLEGRO_BITMAP* Back = al_load_bitmap("Imagens/back.png");
-	ALLEGRO_BITMAP* Exit = al_load_bitmap("Imagens/exit.png");
+	ALLEGRO_BITMAP* Instrucoes = al_load_bitmap("Imagens/Instrucoes.jpg");	
 	ALLEGRO_BITMAP* BrancaLisa = al_load_bitmap("Imagens/BrancaLisa.png");
-	ALLEGRO_BITMAP* BrancaBrilho = al_load_bitmap("Imagens/BrancaBrilho.png");
-	ALLEGRO_BITMAP* BrancaDama = al_load_bitmap("Imagens/BrancaEstrela.png");
-	ALLEGRO_BITMAP* BrancaDamaBrilho = al_load_bitmap("Imagens/BrancaEstrelaBrilho.png");
+	ALLEGRO_BITMAP* BrancaDama = al_load_bitmap("Imagens/BrancaDama.png");
 	ALLEGRO_BITMAP* PretaLisa = al_load_bitmap("Imagens/PretaLisa.png");
-	ALLEGRO_BITMAP* PretaBrilho = al_load_bitmap("Imagens/PretaBrilho.png");
-	ALLEGRO_BITMAP* PretaDama = al_load_bitmap("Imagens/PretaEstrela.png");
-	ALLEGRO_BITMAP* PretaDamaBrilho = al_load_bitmap("Imagens/PretaEstrelaBrilho.png");
-	if (!Interface || !TabuleiroImagem || !Instrucoes || !Play || !Instructions || !Back || !Exit || !BrancaLisa ||
-		!BrancaBrilho || !BrancaDama || !BrancaDamaBrilho || !PretaLisa || !PretaBrilho || !PretaDama || !PretaDamaBrilho) {
+	ALLEGRO_BITMAP* PretaDama = al_load_bitmap("Imagens/PretaDama.png");
+	if (!Interface || !TabuleiroImagem || !Instrucoes || !BrancaLisa ||	!BrancaDama || !PretaLisa || !PretaDama) {
 		std::cout << "Error: Uploads das Imagens" << std::endl;
 		return -1;
 	}
@@ -116,9 +104,6 @@ int main(int argc, char** argv){
 			
 			Inicio:
 			al_draw_bitmap(Interface, 0, 0, 0);
-			al_draw_bitmap(Play, 91, 153, 0);
-			al_draw_bitmap(Instructions, 1025, 153, 0);
-			al_draw_bitmap(Exit, 0, 627, 0);
 			al_flip_display();
 
 			ALLEGRO_EVENT e_interface;
@@ -126,16 +111,16 @@ int main(int argc, char** argv){
 
 			if (e_interface.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				//Play:
-				if (e_interface.mouse.x >= 91 && e_interface.mouse.x <= 341 && e_interface.mouse.y >= 153 && e_interface.mouse.y <= 294) {
+				if (e_interface.mouse.x >= 340 && e_interface.mouse.x <= 672 && e_interface.mouse.y >= 332 && e_interface.mouse.y <= 447) {
 					duringGame = true;
 					duringInterface = false;
 				}
 				//Instructions: 
-				else if (e_interface.mouse.x >= 1025 && e_interface.mouse.x <= 1275 && e_interface.mouse.y >= 153 && e_interface.mouse.y <= 294) {
+				else if (e_interface.mouse.x >= 800 && e_interface.mouse.x <= 980 && e_interface.mouse.y >= 502 && e_interface.mouse.y <= 542) {
 					duringInstructions = true;
 				}
 				//Exit:
-				else if (e_interface.mouse.x >= 0 && e_interface.mouse.x <= 250 && e_interface.mouse.y >= 627 && e_interface.mouse.y <= 768) {
+				else if (e_interface.mouse.x >= 20 && e_interface.mouse.x <= 100 && e_interface.mouse.y >= 20 && e_interface.mouse.y <= 60) {
 					duringInterface = 0;
 					jogando = 0;
 				}
@@ -149,8 +134,6 @@ int main(int argc, char** argv){
 				
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 				al_draw_bitmap(Instrucoes, 0, 0, 0);
-				al_draw_bitmap(Back, 0, 627, 0);
-				al_draw_bitmap(Play, 1100, 627, 0);
 				al_flip_display();
 
 				ALLEGRO_EVENT e_inst;
@@ -191,18 +174,10 @@ int main(int argc, char** argv){
 	al_destroy_bitmap(Interface);
 	al_destroy_bitmap(TabuleiroImagem);
 	al_destroy_bitmap(Instrucoes);
-	al_destroy_bitmap(Play);
-	al_destroy_bitmap(Instructions);
-	al_destroy_bitmap(Back);
-	al_destroy_bitmap(Exit);
 	al_destroy_bitmap(BrancaLisa);
-	al_destroy_bitmap(BrancaBrilho);
 	al_destroy_bitmap(BrancaDama);
-	al_destroy_bitmap(BrancaDamaBrilho);
 	al_destroy_bitmap(PretaLisa);
-	al_destroy_bitmap(PretaBrilho);
 	al_destroy_bitmap(PretaDama);
-	al_destroy_bitmap(PretaDamaBrilho);
 
   return 0;
 }
