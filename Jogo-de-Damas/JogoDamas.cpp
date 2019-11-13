@@ -140,14 +140,9 @@ int main(int argc, char** argv){
 				al_wait_for_event(EventosPrincipais, &e_inst);
 
 				if (e_inst.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-					if (e_inst.mouse.x >= 0 && e_inst.mouse.x <= 250 && e_inst.mouse.y >= 627 && e_inst.mouse.y <= 768) {
+					if (e_inst.mouse.x >= 20 && e_inst.mouse.x <= 100 && e_inst.mouse.y >= 20 && e_inst.mouse.y <= 60) {
 						duringInstructions = false;
 						goto Inicio;
-					}
-					else if (e_inst.mouse.x >= 1100 && e_inst.mouse.x <= 1350 && e_inst.mouse.y >= 627 && e_inst.mouse.y <= 768) {
-						duringInstructions = false;
-						duringGame = true;
-						duringInterface = false;
 					}
 				}
 				else if (e_interface.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
