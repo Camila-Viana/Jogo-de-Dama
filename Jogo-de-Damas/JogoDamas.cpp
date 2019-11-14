@@ -77,12 +77,51 @@ int main(int argc, char** argv){
 	Tabuleiro TabInicial;
 	TabInicial.setTabuleiroInicial();
 
+	//Jogadores:
+	Jogador Player1("Player1", 12);
+	Jogador Player2("Player2", 12);
+	PecaNormal **VetorPecasPlayer1 = new PecaNormal*[12];
+	PecaNormal **VetorPecasPlayer2 = new PecaNormal*[12];
+
+	//Criação de Peças:
+	bool criandopecas = true;
+	while (criandopecas == true) {
+		int i, j, _PosTab[2], aux;
+		for (i = 0; i < 8; i++) {
+			for (j = 0; j < 8; j++) {
+				if (i <= 2 && TabInicial.Tabuleiroinicial[i][j] == 2) {
+					_PosTab[0] = { i };
+					_PosTab[1] = { j };
+					PecaNormal *PecaPlayer2 = new PecaNormal(Player2, (j * 60) + 250, (i * 60) + 60, _PosTab);
+					aux = (i * 4) + j;
+					VetorPecasPlayer2[aux] = PecaPlayer2;
+				}
+				else if (i >= 5 && TabInicial.Tabuleiroinicial[i][j] == 1) {
+					_PosTab[0] = { i };
+					_PosTab[1] = { j };
+					PecaNormal *PecaPlayer1 = new PecaNormal(Player1, (j * 60) + 250, (i * 60) + 60, _PosTab);
+					aux = ((i - 5) * 4) + j;
+					VetorPecasPlayer1[aux] = PecaPlayer1;
+				}
+			}
+		}
+		criandopecas = false;
+	}
+
+	//Verificando:
+	int c;
+	for (c = 0; c < 12; c++) {
+		std::cout << VetorPecasPlayer1[c]->getpositionX() << std::endl;
+		std::cout << VetorPecasPlayer2[c]->getpositionX() << std::endl;
+	}
+
 	//Variaveis de Estado:
 	bool jogando = false;
 	bool duringInterface = false;
 	bool duringInstructions = false;
 	bool duringGame = false;
 	bool duringPremacao = false;
+	bool printandopecas = true;
 
 	//Registro de eventos:
 	al_register_event_source(EventosPrincipais, al_get_display_event_source(Window));
@@ -154,7 +193,21 @@ int main(int argc, char** argv){
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
-			al_flip_display();
+			al_flip_display();	
+
+			while (printandopecas == true){
+				int i, P2x, P2y, P1x, P1y;				
+				for (i = 0; i < 12; i++) {
+					if (i <= 2) {
+						al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
+					}
+					else if (i = 5) {
+						al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
+					}
+					al_flip_display();
+				}
+				printandopecas = false;				
+			}
 
 			al_rest(10.0);
 
@@ -162,6 +215,14 @@ int main(int argc, char** argv){
 
 		}
 	}
+
+	int z;
+	for (z = 0; z < 12; z++) {
+		delete VetorPecasPlayer1[z];
+		delete VetorPecasPlayer2[z];
+	}
+	delete VetorPecasPlayer1;
+	delete VetorPecasPlayer2;
 
 	al_destroy_display(Window);
 	al_destroy_event_queue(EventosPrincipais);
