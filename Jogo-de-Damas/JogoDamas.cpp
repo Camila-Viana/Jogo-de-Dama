@@ -196,12 +196,12 @@ int main(int argc, char** argv){
 			al_flip_display();	
 
 			while (printandopecas == true){
-				int i, P2x, P2y, P1x, P1y;				
+				int i;				
 				for (i = 0; i < 12; i++) {
 					if (i <= 2) {
 						al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
 					}
-					else if (i = 5) {
+					else if (i >= 5) {
 						al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
 					}
 					al_flip_display();
@@ -221,8 +221,8 @@ int main(int argc, char** argv){
 		delete VetorPecasPlayer1[z];
 		delete VetorPecasPlayer2[z];
 	}
-	delete VetorPecasPlayer1;
-	delete VetorPecasPlayer2;
+	delete *VetorPecasPlayer1;
+	delete *VetorPecasPlayer2;
 
 	al_destroy_display(Window);
 	al_destroy_event_queue(EventosPrincipais);
