@@ -93,14 +93,25 @@ int main(int argc, char** argv){
 					_PosTab[0] = { i };
 					_PosTab[1] = { j };
 					PecaNormal *PecaPlayer2 = new PecaNormal(Player2, (j * 60) + 250, (i * 60) + 60, _PosTab);
-					aux = (i * 4) + j;
+					if (i % 2 == 0) {
+						aux = (i * 4) + (j / 2);
+					}
+					else {
+						aux = (i * 4) + ((j - 1) / 2);
+					}
 					VetorPecasPlayer2[aux] = PecaPlayer2;
 				}
 				else if (i >= 5 && TabInicial.Tabuleiroinicial[i][j] == 1) {
 					_PosTab[0] = { i };
 					_PosTab[1] = { j };
 					PecaNormal *PecaPlayer1 = new PecaNormal(Player1, (j * 60) + 250, (i * 60) + 60, _PosTab);
-					aux = ((i - 5) * 4) + j;
+					if (i % 2 == 0) {
+						aux = (i * 4) + ((j - 1) / 2);
+					}
+					else {
+						aux = (i * 4) + (j / 2);
+					}
+					aux = ((i - 5) * 4) + (j/2);
 					VetorPecasPlayer1[aux] = PecaPlayer1;
 				}
 			}
@@ -111,8 +122,10 @@ int main(int argc, char** argv){
 	//Verificando:
 	int c;
 	for (c = 0; c < 12; c++) {
-		std::cout << VetorPecasPlayer1[c]->getpositionX() << std::endl;
-		std::cout << VetorPecasPlayer2[c]->getpositionX() << std::endl;
+		std::cout << VetorPecasPlayer1[c]->getpositionX() << " " << VetorPecasPlayer1[c]->getpositionY() << std::endl;
+	}
+	for (c = 0; c < 12; c++) {
+		std::cout << VetorPecasPlayer2[c]->getpositionX() << " " << VetorPecasPlayer2[c]->getpositionY() << std::endl;
 	}
 
 	//Variaveis de Estado:
