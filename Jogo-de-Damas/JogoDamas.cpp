@@ -92,7 +92,7 @@ int main(int argc, char** argv){
 				if (i <= 2 && TabInicial.Tabuleiroinicial[i][j] == 2) {
 					_PosTab[0] = { i };
 					_PosTab[1] = { j };
-					PecaNormal *PecaPlayer2 = new PecaNormal(Player2, (j * 60) + 250, (i * 60) + 60, _PosTab);
+					PecaNormal *PecaPlayer2 = new PecaNormal(Player2, (j * 60) + 250, (i * 55) + 60, _PosTab);
 					if (i % 2 == 0) {
 						aux = (i * 4) + (j / 2);
 					}
@@ -104,7 +104,7 @@ int main(int argc, char** argv){
 				else if (i >= 5 && TabInicial.Tabuleiroinicial[i][j] == 1) {
 					_PosTab[0] = { i };
 					_PosTab[1] = { j };
-					PecaNormal *PecaPlayer1 = new PecaNormal(Player1, (j * 60) + 250, (i * 60) + 60, _PosTab);
+					PecaNormal *PecaPlayer1 = new PecaNormal(Player1, (j * 60) + 250, (i * 55) + 60, _PosTab);
 					if (i % 2 == 0) {
 						aux = (i * 4) + ((j - 1) / 2);
 					}
@@ -117,15 +117,6 @@ int main(int argc, char** argv){
 			}
 		}
 		criandopecas = false;
-	}
-
-	//Verificando:
-	int c;
-	for (c = 0; c < 12; c++) {
-		std::cout << VetorPecasPlayer1[c]->getpositionX() << " " << VetorPecasPlayer1[c]->getpositionY() << std::endl;
-	}
-	for (c = 0; c < 12; c++) {
-		std::cout << VetorPecasPlayer2[c]->getpositionX() << " " << VetorPecasPlayer2[c]->getpositionY() << std::endl;
 	}
 
 	//Variaveis de Estado:
@@ -211,12 +202,8 @@ int main(int argc, char** argv){
 			while (printandopecas == true){
 				int i;				
 				for (i = 0; i < 12; i++) {
-					if (i <= 2) {
-						al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
-					}
-					else if (i >= 5) {
-						al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
-					}
+					al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
+					al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
 					al_flip_display();
 				}
 				printandopecas = false;				
@@ -229,11 +216,6 @@ int main(int argc, char** argv){
 		}
 	}
 
-	int z;
-	for (z = 0; z < 12; z++) {
-		delete VetorPecasPlayer1[z];
-		delete VetorPecasPlayer2[z];
-	}
 	delete *VetorPecasPlayer1;
 	delete *VetorPecasPlayer2;
 
