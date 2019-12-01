@@ -8,6 +8,7 @@
 #include "allegro5/allegro_ttf.h"
 #include "allegro5/allegro_audio.h"
 #include "allegro5/allegro_acodec.h"
+#include <vector>
 
 const float FPS = 180;
 
@@ -54,7 +55,7 @@ int main(int argc, char** argv){
 		return -1;
 	}
 	al_install_keyboard();
-	if (!al_install_keyboard) {
+	if (!al_install_keyboard()) {
 		std::cout << "Error: Instalacao Teclado" << std::endl;
 		return -1;
 	}
@@ -126,6 +127,7 @@ int main(int argc, char** argv){
 	bool duringGame = false;
 	bool duringPremacao = false;
 	bool printandopecas = true;
+	bool turn = true;
 
 	//Registro de eventos:
 	al_register_event_source(EventosPrincipais, al_get_display_event_source(Window));
@@ -188,30 +190,99 @@ int main(int argc, char** argv){
 						goto Inicio;
 					}
 				}
-				else if (e_interface.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+				else if (e_inst.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 					jogando = false;
 				}
 			}			
 		}
+
+		//Inicio do jogo
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
+		al_flip_display();
+		ALLEGRO_EVENT e_game;
+		int* opcoes[2] = { NULL };//Vector com as opçoes de movimento
+		int* targets[2] = { NULL };//Vector com as peças a serem eliminadas
+		//Loop principal
 		while (jogando == true && duringGame == true) {
+			
+			
+			if (printandopecas == true) {
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+				al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
+				while (printandopecas == true) {
 
-			al_clear_to_color(al_map_rgb(0, 0, 0));
-			al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
-			al_flip_display();	
+					for (int i = 0; i < 12; i++) {
 
-			while (printandopecas == true){
-				int i;				
-				for (i = 0; i < 12; i++) {
-					al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
-					al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
-					al_flip_display();
+						al_draw_bitmap(PretaLisa, VetorPecasPlayer2[i]->getpositionX(), VetorPecasPlayer2[i]->getpositionY(), 0);
+						al_draw_bitmap(BrancaLisa, VetorPecasPlayer1[i]->getpositionX(), VetorPecasPlayer1[i]->getpositionY(), 0);
+						al_flip_display();
+					}
+					printandopecas = false;
 				}
-				printandopecas = false;				
 			}
 
-			al_rest(10.0);
+			
+			al_wait_for_event(EventosPrincipais, &e_game);
+			if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+				for (int i = 0; i < 12; i++) {//Verifica se alguma peça foi selecionada
+					//Seleção de peças do Player1
+					if (turn && e_game.mouse.x >= VetorPecasPlayer1[i]->getpositionX() && e_game.mouse.x <= (VetorPecasPlayer1[i]->getpositionX() + 59) && e_game.mouse.y >= VetorPecasPlayer1[i]->getpositionY() && e_game.mouse.y <= (VetorPecasPlayer1[i]->getpositionY() + 60)) {
+						
+						VetorPecasPlayer1[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer1[i]->getPosTab());
+						
+						while(!printandopecas){
+						al_wait_for_event(EventosPrincipais, &e_game);
+						if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+							
+								
+									VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[i], e_game.mouse.x, e_game.mouse.y);
+									turn = false;
+									for (int j = 0; i < 12; i++) {
+										if (VetorPecasPlayer2[i]->getpositionX() == targets[i][1] && VetorPecasPlayer2[i]->getpositionY() == targets[i][2])
+											VetorPecasPlayer2[i] = NULL;
+									}
+								
+								
+								
+							
+							printandopecas = true;
+						}
+						}
+					}//Seleção de peças do Player2
+					else if (!turn && e_game.mouse.x >= VetorPecasPlayer2[i]->getpositionX() && e_game.mouse.x <= (VetorPecasPlayer2[i]->getpositionX() + 59) && e_game.mouse.y >= VetorPecasPlayer2[i]->getpositionY() && e_game.mouse.y <= (VetorPecasPlayer2[i]->getpositionY() + 60)) {
+						VetorPecasPlayer2[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer1[i]->getPosTab());
+						while (!printandopecas) {
+							al_wait_for_event(EventosPrincipais, &e_game);
+							if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 
-			jogando = false;
+								VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[1], e_game.mouse.x, e_game.mouse.y);
+								turn = false;
+								for (int j = 0; i < 12; i++) {
+									if (VetorPecasPlayer2[i]->getpositionX() == targets[i][1] && VetorPecasPlayer2[i]->getpositionY() == targets[i][2])
+										VetorPecasPlayer2[i] = NULL;
+								}
+							
+									
+								}
+								printandopecas = true;
+							
+						}
+					}
+
+
+				}
+				
+				
+			}else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+				jogando = false;
+			}
+
+			
+
+			//al_rest(0.5);
+
+			//jogando = false;
 
 		}
 	}
