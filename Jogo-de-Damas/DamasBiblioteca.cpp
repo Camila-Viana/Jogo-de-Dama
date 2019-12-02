@@ -81,7 +81,7 @@ PecaNormal::PecaNormal(Jogador _jogador, int _x, int _y, int _PosTab[2]) {
 };
 
 void PecaNormal::movimento(Tabuleiro *tab, bool turn, int *opcoes, int *targets, int x, int y) {
-	if (x >= ((opcoes[1] * 60) + 250) && x <= ((opcoes[1] * 60) + 310) && y >= ((opcoes[2] * 55) + 60) && y <= (opcoes[2] * 55) + 120) {
+	if (x >= ((opcoes[0] * 60) + 250) && x <= ((opcoes[0] * 60) + 310) && y >= ((opcoes[1] * 55) + 60) && y <= (opcoes[1] * 55) + 120) {
 		tab->Tabuleiroinicial[(opcoes[0])][(opcoes[1])] = 1;
 		if (opcoes[2] != NULL)
 			tab->Tabuleiroinicial[(targets[0])][(targets[1])] = 0;
@@ -109,16 +109,16 @@ void PecaNormal::opcoesMovimento(Tabuleiro tab, int *opcoes, int *targets, int P
 		//Verifica a primeira casa à esquerda
 		if(PosTab[0] - 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] - 1)][(PosTab[1] - 1)] == 0)
 		{
-				pos[0] = PosTab[0] - 1;
-				pos[1] = PosTab[1] - 1;
+				pos[0] = this->PosTab[0] - 1;
+				pos[1] = this->PosTab[1] - 1;
 				pos[2] = NULL;
 				opcoes[0] = *pos;
 				targets[0] = NULL;
 		}
 		else if (PosTab[0] - 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] - 1)][(PosTab[1] - 1)] == 2) {
 			if (PosTab[0] - 2 >= 0 && PosTab[1] - 2 >= 0 && tab.Tabuleiroinicial[(PosTab[0] - 2)][(PosTab[1] - 2)] == 0) {
-				pos[0] = PosTab[0] - 1;
-				pos[1] = PosTab[1] - 1;
+				pos[0] = this->PosTab[0] - 2;
+				pos[1] = this->PosTab[1] - 2;
 				pos[2] = 1;
 				targets[1] = *pos;
 				pos[0]--;
@@ -130,16 +130,16 @@ void PecaNormal::opcoesMovimento(Tabuleiro tab, int *opcoes, int *targets, int P
 		//Verifica a primeira casa à direita
 		if (PosTab[0] + 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] - 1)] == 0)
 		{
-			pos[0] = PosTab[0] + 1;
-			pos[1] = PosTab[1] - 1;
+			pos[0] = this->PosTab[0] + 1;
+			pos[1] = this->PosTab[1] - 1;
 			pos[2] = NULL;
 			opcoes[1] = *pos;
 			targets[1] = NULL;
 		}
 		else if (PosTab[0] + 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] - 1)] == 2) {
 			if (PosTab[0] + 2 >= 0 && PosTab[1] - 2 >= 0 && tab.Tabuleiroinicial[(PosTab[0] - 2)][(PosTab[1] - 2)] == 0) {
-				pos[0] = PosTab[0] + 1;
-				pos[1] = PosTab[1] - 1;
+				pos[0] = this->PosTab[0] + 2;
+				pos[1] = this->PosTab[1] - 2;
 				pos[2] = 2;
 				targets[1] = *pos;
 				pos[0]++;
@@ -150,7 +150,47 @@ void PecaNormal::opcoesMovimento(Tabuleiro tab, int *opcoes, int *targets, int P
 
 	}
 	else if (this->jogador.getname() == "Player2") {
+		//Verifica a primeira casa à esquerda
+		if (PosTab[0] + 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] - 1)] == 0)
+		{
+			pos[0] = this->PosTab[0] + 1;
+			pos[1] = this->PosTab[1] - 1;
+			pos[2] = NULL;
+			opcoes[0] = *pos;
+			targets[0] = NULL;
+		}
+		else if (PosTab[0] + 1 >= 0 && PosTab[1] - 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] - 1)] == 2) {
+			if (PosTab[0] + 2 >= 0 && PosTab[1] - 2 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 2)][(PosTab[1] - 2)] == 0) {
+				pos[0] = this->PosTab[0] + 2;
+				pos[1] = this->PosTab[1] - 2;
+				pos[2] = 1;
+				targets[1] = *pos;
+				pos[0]--;
+				pos[1]--;
+				opcoes[1] = *pos;
+			}
+		}
 
+		//Verifica a primeira casa à direita
+		if (PosTab[0] + 1 >= 0 && PosTab[1] + 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] + 1)] == 0)
+		{
+			pos[0] = this->PosTab[0] + 1;
+			pos[1] = this->PosTab[1] + 1;
+			pos[2] = NULL;
+			opcoes[1] = *pos;
+			targets[1] = NULL;
+		}
+		else if (PosTab[0] + 1 >= 0 && PosTab[1] + 1 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 1)][(PosTab[1] + 1)] == 2) {
+			if (PosTab[0] + 2 >= 0 && PosTab[1] + 2 >= 0 && tab.Tabuleiroinicial[(PosTab[0] + 2)][(PosTab[1] + 2)] == 0) {
+				pos[0] = this->PosTab[0] + 2;
+				pos[1] = this->PosTab[1] + 2;
+				pos[2] = 2;
+				targets[1] = *pos;
+				pos[0]++;
+				pos[1]--;
+				opcoes[1] = *pos;
+			}
+		}
 		
 	}
 

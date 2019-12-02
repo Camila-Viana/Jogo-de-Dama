@@ -78,11 +78,13 @@ int main(int argc, char** argv){
 	Tabuleiro TabInicial;
 	TabInicial.setTabuleiroInicial();
 
-	//Jogadores:
+	//Jogadores e Variaveis:
 	Jogador Player1("Player1", 12);
 	Jogador Player2("Player2", 12);
 	PecaNormal **VetorPecasPlayer1 = new PecaNormal*[12];
 	PecaNormal **VetorPecasPlayer2 = new PecaNormal*[12];
+	int opcoes[2][3] = { NULL };//Vector com as opçoes de movimento
+	int targets[2][3] = { NULL };//Vector com as peças a serem eliminadas
 
 	//Criação de Peças:
 	bool criandopecas = true;
@@ -200,9 +202,7 @@ int main(int argc, char** argv){
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		al_draw_bitmap(TabuleiroImagem, 0, 0, 0);
 		al_flip_display();
-		ALLEGRO_EVENT e_game;
-		int* opcoes[2] = { NULL };//Vector com as opçoes de movimento
-		int* targets[2] = { NULL };//Vector com as peças a serem eliminadas
+
 		//Loop principal
 		while (jogando == true && duringGame == true) {
 			
@@ -221,8 +221,9 @@ int main(int argc, char** argv){
 					printandopecas = false;
 				}
 			}
-
 			
+			ALLEGRO_EVENT e_game;
+
 			al_wait_for_event(EventosPrincipais, &e_game);
 			if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				for (int i = 0; i < 12; i++) {//Verifica se alguma peça foi selecionada
@@ -232,40 +233,42 @@ int main(int argc, char** argv){
 						VetorPecasPlayer1[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer1[i]->getPosTab());
 						
 						while(!printandopecas){
-						al_wait_for_event(EventosPrincipais, &e_game);
-						if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+							al_wait_for_event(EventosPrincipais, &e_game);
+							if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 							
 								
 									VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[i], e_game.mouse.x, e_game.mouse.y);
 									turn = false;
-									for (int j = 0; i < 12; i++) {
-										if (VetorPecasPlayer2[i]->getpositionX() == targets[i][1] && VetorPecasPlayer2[i]->getpositionY() == targets[i][2])
-											VetorPecasPlayer2[i] = NULL;
+									for (int i = 0; i < 12; i++) {
+										for (int j = 0; j < 2; j++) {
+											if (VetorPecasPlayer2[i]->getpositionX() == targets[j][1] && VetorPecasPlayer2[i]->getpositionY() == targets[j][2])
+												VetorPecasPlayer2[i] = NULL;
+										}
 									}
 								
 								
 								
 							
 							printandopecas = true;
-						}
+							}
 						}
 					}//Seleção de peças do Player2
 					else if (!turn && e_game.mouse.x >= VetorPecasPlayer2[i]->getpositionX() && e_game.mouse.x <= (VetorPecasPlayer2[i]->getpositionX() + 59) && e_game.mouse.y >= VetorPecasPlayer2[i]->getpositionY() && e_game.mouse.y <= (VetorPecasPlayer2[i]->getpositionY() + 60)) {
-						VetorPecasPlayer2[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer1[i]->getPosTab());
+						VetorPecasPlayer2[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer2[i]->getPosTab());
 						while (!printandopecas) {
 							al_wait_for_event(EventosPrincipais, &e_game);
 							if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 
-								VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[1], e_game.mouse.x, e_game.mouse.y);
+								VetorPecasPlayer2[i]->movimento(&TabInicial, turn, opcoes[i], targets[1], e_game.mouse.x, e_game.mouse.y);
 								turn = false;
-								for (int j = 0; i < 12; i++) {
-									if (VetorPecasPlayer2[i]->getpositionX() == targets[i][1] && VetorPecasPlayer2[i]->getpositionY() == targets[i][2])
-										VetorPecasPlayer2[i] = NULL;
+								for (int i = 0; i <= 12; i++) {
+									for (int j = 0; j < 2; j++) {
+										if (VetorPecasPlayer1[i]->getpositionX() == targets[j][1] && VetorPecasPlayer2[i]->getpositionY() == targets[j][2])
+											VetorPecasPlayer1[i] = NULL;
+									}
 								}
-							
-									
-								}
-								printandopecas = true;
+							}
+							printandopecas = true;
 							
 						}
 					}
@@ -274,7 +277,8 @@ int main(int argc, char** argv){
 				}
 				
 				
-			}else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			}
+			else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				jogando = false;
 			}
 
