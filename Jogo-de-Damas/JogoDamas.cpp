@@ -83,8 +83,8 @@ int main(int argc, char** argv){
 	Jogador Player2("Player2", 12);
 	PecaNormal **VetorPecasPlayer1 = new PecaNormal*[12];
 	PecaNormal **VetorPecasPlayer2 = new PecaNormal*[12];
-	int opcoes[2][3] = { NULL };//Vector com as opçoes de movimento
-	int targets[2][3] = { NULL };//Vector com as peças a serem eliminadas
+	int opcoes[2][2] = { NULL };//Vector com as opçoes de movimento
+	int targets[2][2] = { NULL };//Vector com as peças a serem eliminadas
 
 	//Criação de Peças:
 	bool criandopecas = true;
@@ -230,64 +230,59 @@ int main(int argc, char** argv){
 					//Seleção de peças do Player1
 					if (turn && e_game.mouse.x >= VetorPecasPlayer1[i]->getpositionX() && e_game.mouse.x <= (VetorPecasPlayer1[i]->getpositionX() + 59) && e_game.mouse.y >= VetorPecasPlayer1[i]->getpositionY() && e_game.mouse.y <= (VetorPecasPlayer1[i]->getpositionY() + 60)) {
 						
-						VetorPecasPlayer1[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer1[i]->getPosTab());
+						VetorPecasPlayer1[i]->opcoesMovimento(TabInicial, opcoes, targets, VetorPecasPlayer1[i]->getPosTabX(), VetorPecasPlayer1[i]->getPosTabY());
+
+						std::cout << opcoes[0][0] << " " << opcoes[0][1] << std::endl;
+						std::cout << opcoes[1][0] << " " << opcoes[1][1] << std::endl;
 						
 						while(!printandopecas){
 							al_wait_for_event(EventosPrincipais, &e_game);
 							if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 							
-								
-									VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[i], e_game.mouse.x, e_game.mouse.y);
-									turn = false;
-									for (int i = 0; i < 12; i++) {
-										for (int j = 0; j < 2; j++) {
-											if (VetorPecasPlayer2[i]->getpositionX() == targets[j][1] && VetorPecasPlayer2[i]->getpositionY() == targets[j][2])
-												VetorPecasPlayer2[i] = NULL;
+								VetorPecasPlayer1[i]->movimento(&TabInicial, turn, opcoes[i], targets[i], e_game.mouse.x, e_game.mouse.y);
+								turn = false;
+								for (int j = 0; j < 12; j++) {
+									for (int z = 0; z < 2; z++) {
+										if (VetorPecasPlayer2[j]->getpositionX() == targets[z][0] && VetorPecasPlayer2[j]->getpositionY() == targets[z][1]) {
+											VetorPecasPlayer2[j] = NULL;
 										}
 									}
+								}
 								
-								
-								
-							
-							printandopecas = true;
+								printandopecas = true;
 							}
 						}
 					}//Seleção de peças do Player2
 					else if (!turn && e_game.mouse.x >= VetorPecasPlayer2[i]->getpositionX() && e_game.mouse.x <= (VetorPecasPlayer2[i]->getpositionX() + 59) && e_game.mouse.y >= VetorPecasPlayer2[i]->getpositionY() && e_game.mouse.y <= (VetorPecasPlayer2[i]->getpositionY() + 60)) {
-						VetorPecasPlayer2[i]->opcoesMovimento(TabInicial, *opcoes, *targets, VetorPecasPlayer2[i]->getPosTab());
+						
+						VetorPecasPlayer2[i]->opcoesMovimento(TabInicial, opcoes, targets, VetorPecasPlayer2[i]->getPosTabX(), VetorPecasPlayer2[i]->getPosTabY());
+
+						std::cout << opcoes[0][0] << " " << opcoes[0][1] << std::endl;
+						std::cout << opcoes[1][0] << " " << opcoes[1][1] << std::endl;
+						
 						while (!printandopecas) {
 							al_wait_for_event(EventosPrincipais, &e_game);
 							if (e_game.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 
 								VetorPecasPlayer2[i]->movimento(&TabInicial, turn, opcoes[i], targets[1], e_game.mouse.x, e_game.mouse.y);
 								turn = false;
-								for (int i = 0; i <= 12; i++) {
-									for (int j = 0; j < 2; j++) {
-										if (VetorPecasPlayer1[i]->getpositionX() == targets[j][1] && VetorPecasPlayer2[i]->getpositionY() == targets[j][2])
+								for (int j = 0; j <= 12; j++) {
+									for (int z = 0; z < 2; z++) {
+										if (VetorPecasPlayer1[j]->getpositionX() == targets[z][1] && VetorPecasPlayer1[j]->getpositionY() == targets[z][2]) {
 											VetorPecasPlayer1[i] = NULL;
+										}
 									}
 								}
 							}
-							printandopecas = true;
-							
+
+							printandopecas = true;							
 						}
 					}
-
-
 				}
-				
-				
 			}
 			else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 				jogando = false;
 			}
-
-			
-
-			//al_rest(0.5);
-
-			//jogando = false;
-
 		}
 	}
 
