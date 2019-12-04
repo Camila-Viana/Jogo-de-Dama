@@ -41,6 +41,7 @@ public:
 	virtual int getpositionY();
 	virtual int getPosTabX();
 	virtual int getPosTabY();
+	virtual Jogador getjogador();
 };
 
 //CLASSE DA PEÇA NORMAL
@@ -61,6 +62,7 @@ public:
 	int getpositionY() override;
 	int getPosTabX() override;
 	int getPosTabY() override;
+	Jogador getjogador() override;
 };
 
 void TransformandoDama(Peca** Vetorpeca, int pos);
@@ -82,8 +84,7 @@ public:
 	int getpositionY() override;
 	int getPosTabX() override;
 	int getPosTabY() override;
+	Jogador getjogador() override;
 };
-
-
 
 #endif 

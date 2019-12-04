@@ -79,7 +79,7 @@ void Peca::movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int targets[2]
 
 void Peca::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) 
 {
-	
+	return;
 };
 
 int Peca::getpositionX() 
@@ -100,6 +100,12 @@ return 0;
 int Peca::getPosTabY() 
 { 
 return 0; 
+};
+
+Jogador Peca::getjogador() 
+{
+Jogador jogador;
+return jogador; 
 };
 
 PecaNormal::PecaNormal() 
@@ -147,7 +153,7 @@ void PecaNormal::movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int targ
 
 void PecaNormal::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) 
 {
-	int aux = 0;
+	
 	if (this->jogador.getname() == "Player1")
 	{
 		
@@ -155,21 +161,21 @@ void PecaNormal::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targ
 		
 		if(PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 0)
 		{
-			opcoes[aux][0] = 5;
-			opcoes[aux][1] = 7;
-			targets[aux][0] = NULL;
-			targets[aux][1] = NULL;
-			aux++;
+			opcoes[0][0] = PosTabX - 1;
+			opcoes[0][1] = PosTabY - 1;
+			targets[0][0] = NULL;
+			targets[0][1] = NULL;
+			
 		}
 		else if (PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 2) 
 		{
 			if (PosTabX - 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY - 2)] == 0) 
 			{
-				opcoes[aux][0] = PosTabX - 2;
-				opcoes[aux][1] = PosTabY - 2;
-				targets[aux][0] = PosTabX - 1;
-				targets[aux][1] = PosTabY - 1;
-				aux++;
+				opcoes[0][0] = PosTabX - 2;
+				opcoes[0][1] = PosTabY - 2;
+				targets[0][0] = PosTabX - 1;
+				targets[0][1] = PosTabY - 1;
+				
 			}
 		}
 
@@ -177,19 +183,19 @@ void PecaNormal::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targ
 
 		if (PosTabX - 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 0)
 		{
-			opcoes[aux][0] = PosTabX - 1;
-			opcoes[aux][1] = PosTabY + 1;
-			targets[aux][0] = NULL;
-			targets[aux][1] = NULL;
+			opcoes[1][0] = PosTabX - 1;
+			opcoes[1][1] = PosTabY + 1;
+			targets[1][0] = NULL;
+			targets[1][1] = NULL;
 		}
 		else if (PosTabX - 1 >= 0 && PosTabY +1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 2) 
 		{
 			if (PosTabX - 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY + 2)] == 0) 
 			{
-				opcoes[aux][0] = PosTabX - 2;
-				opcoes[aux][1] = PosTabY + 2;
-				targets[aux][0] = PosTabX - 1;
-				targets[aux][1] = PosTabY + 1;
+				opcoes[1][0] = PosTabX - 2;
+				opcoes[1][1] = PosTabY + 2;
+				targets[1][0] = PosTabX - 1;
+				targets[1][1] = PosTabY + 1;
 			}
 		}
 
@@ -199,21 +205,21 @@ void PecaNormal::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targ
 		//VERIFICAÇÃO DA PRIMEIRA CASA A ESQUERDA DA PEÇA
 
 		if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 0){
-			opcoes[aux][0] = PosTabX + 1;
-			opcoes[aux][1] = PosTabY - 1;
-			targets[aux][0] = NULL;
-			targets[aux][1] = NULL;
-			aux++;
+			opcoes[0][0] = PosTabX + 1;
+			opcoes[0][1] = PosTabY - 1;
+			targets[0][0] = NULL;
+			targets[0][1] = NULL;
+			
 		}
 		else if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 2) 
 		{
 			if (PosTabX + 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY - 2)] == 0) 
 			{
-				opcoes[aux][0] = PosTabX + 2;
-				opcoes[aux][1] = PosTabY - 2;
-				targets[aux][0] = PosTabX + 1;
-				targets[aux][1] = PosTabY - 1;
-				aux++;
+				opcoes[0][0] = PosTabX + 2;
+				opcoes[0][1] = PosTabY - 2;
+				targets[0][0] = PosTabX + 1;
+				targets[0][1] = PosTabY - 1;
+				
 			}			
 		}
 
@@ -221,24 +227,23 @@ void PecaNormal::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targ
 		
 		if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 0)
 		{
-			opcoes[aux][0] = PosTabX + 1;
-			opcoes[aux][1] = PosTabY + 1;
-			targets[aux][0] = NULL;
-			targets[aux][1] = NULL;
+			opcoes[1][0] = PosTabX + 1;
+			opcoes[1][1] = PosTabY + 1;
+			targets[1][0] = NULL;
+			targets[1][1] = NULL;
 		}
 		else if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 2) 
 			{
 			if (PosTabX + 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY + 2)] == 0) 
 			{
-				opcoes[aux][0] = PosTabX + 2;
-				opcoes[aux][1] = PosTabY + 2;
-				targets[aux][0] = PosTabX + 1;
-				targets[aux][1] = PosTabY + 1;
+				opcoes[1][0] = PosTabX + 2;
+				opcoes[1][1] = PosTabY + 2;
+				targets[1][0] = PosTabX + 1;
+				targets[1][1] = PosTabY + 1;
 			}
 		}		
 	}
-	std::cout << opcoes[0][0] << " " << opcoes[0][1] << std::endl;
-	std::cout << opcoes[1][0] << " " << opcoes[1][1] << std::endl;
+
 };
 
 //PEGA A POSIÇÃO X DA PEÇA EM RELAÇÃO A TELA
@@ -269,15 +274,20 @@ int PecaNormal::getPosTabY()
 	return this->PosTab[1];
 };
 
+Jogador PecaNormal::getjogador() 
+{
+	return this->jogador;
+}
+
 
 void TransformandoDama(Peca **Vetorpeca,int pos) 
 {
-	//int _PosTab[2];
-	//_PosTab[0] = Vetorpeca[pos].getPosTabX();
-	//_PosTab[1] = Vetorpeca[pos].getPosTabY();
-	//PecaDama *Dama = new PecaDama(Vetorpeca[pos].jogador.getname(), Vetorpeca[pos].getpositionX(), Vetorpeca[pos].getpositionY(), _PosTab[2]);
-	//delete Vetorpeca[pos];
-	//Vetorpeca[pos] = Dama;
+	int _PosTab[2];
+	_PosTab[0] = Vetorpeca[pos]->getPosTabX();
+	_PosTab[1] = Vetorpeca[pos]->getPosTabY();
+	PecaDama* Dama = new PecaDama(Vetorpeca[pos]->getjogador(), Vetorpeca[pos]->getpositionX(), Vetorpeca[pos]->getpositionY(), _PosTab);
+	delete Vetorpeca[pos];
+	Vetorpeca[pos] = Dama;
 };
 
 
@@ -320,7 +330,179 @@ void PecaDama::movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int target
 
 void PecaDama::opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) 
 {
+	opcoes = {NULL};
+	targets = { NULL };
+	if (this->jogador.getname() == "Player1")
+	{
+		
+		//VERIFICAÇÃO DA PRIMEIRA CASA A ESQUERDA SUPERIOR DA PEÇA
+		
+		if(PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 0)
+		{
+			opcoes[0][0] = PosTabX;
+			opcoes[0][1] = PosTabY;
+			targets[0][0] = NULL;
+			targets[0][1] = NULL;
+		}
+		else if (PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 2) 
+		{
+			if (PosTabX - 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY - 2)] == 0) 
+			{
+				opcoes[0][0] = PosTabX - 2;
+				opcoes[0][1] = PosTabY - 2;
+				targets[0][0] = PosTabX - 1;
+				targets[0][1] = PosTabY - 1;
+				
+			}
+		}
 
+		//VERIFICAÇÃO DA PRIMEIRA CASA A DIREITA SUPERIOR DA PEÇA
+
+		if (PosTabX - 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 0)
+		{
+			opcoes[1][0] = PosTabX - 1;
+			opcoes[1][1] = PosTabY + 1;
+			targets[1][0] = NULL;
+			targets[1][1] = NULL;
+		}
+		else if (PosTabX - 1 >= 0 && PosTabY +1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 2) 
+		{
+			if (PosTabX - 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY + 2)] == 0) 
+			{
+				opcoes[1][0] = PosTabX - 2;
+				opcoes[1][1] = PosTabY + 2;
+				targets[1][0] = PosTabX - 1;
+				targets[1][1] = PosTabY + 1;
+			}
+		}
+
+		//VERIFICAÇÃO DA PRIMEIRA CASA A ESQUERDA INFERIOR DA PEÇA
+		
+		if(PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 0)
+		{
+			opcoes[2][0] = PosTabX;
+			opcoes[2][1] = PosTabX;
+			targets[2][0] = NULL;
+			targets[2][1] = NULL;
+			
+		}
+		else if (PosTabX - 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY - 1)] == 2) 
+		{
+			if (PosTabX - 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY - 2)] == 0) 
+			{
+				opcoes[2][0] = PosTabX - 2;
+				opcoes[2][1] = PosTabY - 2;
+				targets[2][0] = PosTabX - 1;
+				targets[2][1] = PosTabY - 1;
+				
+			}
+		}
+
+		//VERIFICAÇÃO DA PRIMEIRA CASA A DIREITA INFERIOR DA PEÇA
+
+		if (PosTabX - 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 0)
+		{
+			opcoes[3][0] = PosTabX - 1;
+			opcoes[3][1] = PosTabY + 1;
+			targets[3][0] = NULL;
+			targets[3][1] = NULL;
+		}
+		else if (PosTabX - 1 >= 0 && PosTabY +1 >= 0 && tabuleiro[(PosTabX - 1)][(PosTabY + 1)] == 2) 
+		{
+			if (PosTabX - 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX - 2)][(PosTabY + 2)] == 0) 
+			{
+				opcoes[3][0] = PosTabX - 2;
+				opcoes[3][1] = PosTabY + 2;
+				targets[3][0] = PosTabX - 1;
+				targets[3][1] = PosTabY + 1;
+			}
+		}
+
+	}
+	else if (this->jogador.getname() == "Player2") {
+		
+		//VERIFICAÇÃO DA PRIMEIRA CASA A ESQUERDA SUPERIOR DA PEÇA
+
+		if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 0){
+			opcoes[0][0] = PosTabX + 1;
+			opcoes[0][1] = PosTabY - 1;
+			targets[0][0] = NULL;
+			targets[0][1] = NULL;
+			
+		}
+		else if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 2) 
+		{
+			if (PosTabX + 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY - 2)] == 0) 
+			{
+				opcoes[0][0] = PosTabX + 2;
+				opcoes[0][1] = PosTabY - 2;
+				targets[0][0] = PosTabX + 1;
+				targets[0][1] = PosTabY - 1;
+				
+			}			
+		}
+
+		//VERIFICAÇÃO DA PRIMEIRA CASA A DIREITA SUPERIOR DA PEÇA
+		
+		if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 0)
+		{
+			opcoes[1][0] = PosTabX + 1;
+			opcoes[1][1] = PosTabY + 1;
+			targets[1][0] = NULL;
+			targets[1][1] = NULL;
+		}
+		else if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 2) 
+			{
+			if (PosTabX + 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY + 2)] == 0) 
+			{
+				opcoes[1][0] = PosTabX + 2;
+				opcoes[1][1] = PosTabY + 2;
+				targets[1][0] = PosTabX + 1;
+				targets[1][1] = PosTabY + 1;
+			}
+		}		
+
+		//VERIFICAÇÃO DA PRIMEIRA CASA A ESQUERDA INFERIOR DA PEÇA
+
+		if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 0){
+			opcoes[2][0] = PosTabX + 1;
+			opcoes[2][1] = PosTabY - 1;
+			targets[2][0] = NULL;
+			targets[2][1] = NULL;
+			
+		}
+		else if (PosTabX + 1 >= 0 && PosTabY - 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY - 1)] == 2) 
+		{
+			if (PosTabX + 2 >= 0 && PosTabY - 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY - 2)] == 0) 
+			{
+				opcoes[2][0] = PosTabX + 2;
+				opcoes[2][1] = PosTabY - 2;
+				targets[2][0] = PosTabX + 1;
+				targets[2][1] = PosTabY - 1;
+				
+			}			
+		}
+
+		//VERIFICAÇÃO DA PRIMEIRA CASA A DIREITA DA PEÇA
+		
+		if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 0)
+		{
+			opcoes[3][0] = PosTabX + 1;
+			opcoes[3][1] = PosTabY + 1;
+			targets[3][0] = NULL;
+			targets[3][1] = NULL;
+		}
+		else if (PosTabX + 1 >= 0 && PosTabY + 1 >= 0 && tabuleiro[(PosTabX + 1)][(PosTabY + 1)] == 2) 
+			{
+			if (PosTabX + 2 >= 0 && PosTabY + 2 >= 0 && tabuleiro[(PosTabX + 2)][(PosTabY + 2)] == 0) 
+			{
+				opcoes[3][0] = PosTabX + 2;
+				opcoes[3][1] = PosTabY + 2;
+				targets[3][0] = PosTabX + 1;
+				targets[3][1] = PosTabY + 1;
+			}
+		}
+	}
 };
 
 int PecaDama::getpositionX() 
@@ -342,4 +524,9 @@ int PecaDama::getPosTabY()
 {
 	return this->PosTab[1];
 };
+
+Jogador PecaDama::getjogador()
+{
+	return this->jogador;
+}
 

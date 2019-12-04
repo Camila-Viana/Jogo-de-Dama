@@ -149,8 +149,8 @@ int main(int argc, char** argv)
 	
 	//CRIANDO VETORES PARA MOVIMENTAR E ELIMINAR AS PEÇAS
 
-	int opcoes[2][2] = {0};
-	int targets[2][2] = {0};
+	int opcoes[4][2] = {NULL};
+	int targets[4][2] = {NULL};
 
 	//CRIAÇÃO DE PEÇAS (INÍCIO)
 
@@ -347,9 +347,6 @@ int main(int argc, char** argv)
 						
 						VetorPecasPlayer1[i]->opcoesMovimento(TabInicial.Tabuleiroinicial, opcoes, targets, VetorPecasPlayer1[i]->getPosTabX(), VetorPecasPlayer1[i]->getPosTabY());
 
-						//std::cout << opcoes[0][0] << " " << opcoes[0][1] << std::endl;
-						//std::cout << opcoes[1][0] << " " << opcoes[1][1] << std::endl;
-						
 						while(!printandopecas)
 						{
 							al_wait_for_event(EventosPrincipais, &e_game);
@@ -366,6 +363,7 @@ int main(int argc, char** argv)
 										if (VetorPecasPlayer2[j]->getpositionX() == targets[z][0] && VetorPecasPlayer2[j]->getpositionY() == targets[z][1]) 
 										{
 											VetorPecasPlayer2[j] = NULL;
+											Player2.decreaseNpecas();
 										}
 									}
 								}
@@ -397,6 +395,7 @@ int main(int argc, char** argv)
 										if (VetorPecasPlayer1[j]->getpositionX() == targets[z][1] && VetorPecasPlayer1[j]->getpositionY() == targets[z][2]) 
 										{
 											VetorPecasPlayer1[i] = NULL;
+											Player1.decreaseNpecas();
 										}
 									}
 								}
@@ -410,10 +409,16 @@ int main(int argc, char** argv)
 			
 			//FINALIZANDO JOGO
 
-			else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) 
+			else if (e_game.type == ALLEGRO_EVENT_DISPLAY_CLOSE) //VERIFICA SE HOUVE UM CLIQUE NO BOTÃO DE FECHAR A JANELA
 			{
 				jogando = false;
 			}
+
+			if (Player1.getNpecas() == 0 || Player2.getNpecas() == 0) 
+			{//VERIFICA SE AS PEÇAS DE ALGUM DOS JOGADORES ACABARAM
+				jogando = false;
+			}
+			
 		}
 	}
 
