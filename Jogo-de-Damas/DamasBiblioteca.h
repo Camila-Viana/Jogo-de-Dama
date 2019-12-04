@@ -5,14 +5,19 @@
 #include <iostream>
 #include <vector>
 
-class Tabuleiro {
+//CLASSE DO TABULEIRO
+
+class Tabuleiro 
+{
 public:
 	int Tabuleiroinicial[8][8];
 	void setTabuleiroInicial();
 };
 
+//CLASSE DO JOGADOR
 
-class Jogador {
+class Jogador 
+{
 private:
 	std::string Nome;
 	int Npecas;
@@ -25,17 +30,23 @@ public:
 	int getNpecas();
 };
 
-class Peca {
+//CLASSE DA PEÇA
+
+class Peca
+{
 public:
-	virtual void movimento(Tabuleiro *tab, bool turn, int *opcoes, int *targets, int x, int y);
-	virtual void opcoesMovimento(Tabuleiro tab, int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY);
+	virtual void movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int targets[2][2], int x, int y);
+	virtual void opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY);
 	virtual int getpositionX();
 	virtual int getpositionY();
 	virtual int getPosTabX();
 	virtual int getPosTabY();
 };
 
-class PecaNormal : public Peca {
+//CLASSE DA PEÇA NORMAL
+
+class PecaNormal : public Peca 
+{
 private:
 	Jogador jogador;
 	int x;
@@ -44,17 +55,20 @@ private:
 public:
 	PecaNormal();
 	PecaNormal(Jogador _jogador, int _x, int _y, int _PosTab[2]);
-	void movimento(Tabuleiro *tab, bool turn, int *opcoes, int *targets, int x, int y) override;
-	void opcoesMovimento(Tabuleiro tab, int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) override;
+	void movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int targets[2][2], int x, int y) override;
+	void opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) override;
 	int getpositionX() override;
 	int getpositionY() override;
 	int getPosTabX() override;
 	int getPosTabY() override;
 };
 
-void TransformandoDama(PecaNormal peca);
+void TransformandoDama(Peca** Vetorpeca, int pos);
 
-class PecaDama : public Peca {
+//CLASSE DA PEÇA DAMA
+
+class PecaDama : public Peca 
+{
 private:
 	Jogador jogador;
 	int x;
@@ -62,14 +76,14 @@ private:
 	int PosTab[2];
 public:
 	PecaDama(Jogador _jogador, int _x, int _y, int _PosTab[2]);
-	void movimento(Tabuleiro *tab, bool turn, int *opcoes, int *targets, int x, int y) override;
-	void opcoesMovimento(Tabuleiro tab, int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) override;
+	void movimento(Tabuleiro *tab, bool turn, int opcoes[2][2], int targets[2][2], int x, int y) override;
+	void opcoesMovimento(int tabuleiro[8][8], int opcoes[2][2], int targets[2][2], int PosTabX, int PosTabY) override;
 	int getpositionX() override;
 	int getpositionY() override;
 	int getPosTabX() override;
 	int getPosTabY() override;
 };
 
-void DestrutorFinal();
+
 
 #endif 
