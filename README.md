@@ -11,11 +11,11 @@ Sistema de pontuação básico;
 
 Assim, garantirei que meus alunos pratiquem fora do período de aulas e desenvolvam suas habilidades no jogo.
 
----------------------------------------------------------FIM DA USER STORIES-------------------------------------------------------
+--------------------------------------------------------FIM DA USER STORIES------------------------------------------------------
 
 
 
-------------------------------------------------------COMO COMPILAR O PROGRAMA-----------------------------------------------------
+-------------------------------------------------COMO COMPILAR O PROGRAMA-------------------------------------------------
 
 Primeiramente, para compilar esse código você precisará do software Microsoft Visual Studio.
 
@@ -23,4 +23,4 @@ Já de posse desse programa, você deve conferir se todos os arquivos referentes
 
 Após isso, basta compilar os codigos normalmente, utilizando o software mencionado acima.
 
--------------------------------------------------FIM DAS INSTRUÇÕES DE COMPILAÇÃO--------------------------------------------------
+--------------------------------------------FIM DAS INSTRUÇÕES DE COMPILAÇÃO----------------------------------------------
